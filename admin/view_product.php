@@ -1,0 +1,212 @@
+<?php
+/**
+ * View Product Page
+ * Display product details
+ */
+
+// Include database configuration
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+
+// Start session
+session_start();
+
+// Check if admin is logged in
+if (!isset($_SESSION['admin_logged_in'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// Get product ID
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Get product details
+$product = null;
+if ($product_id > 0) {
+    $stmt = $db->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->bind_param("i", $product_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result && $result->num_rows > 0) {
+        $product = $result->fetch_assoc();
+    }
+}
+
+// If product not found, redirect
+if (!$product) {
+    header('Location: products.php');
+    exit;
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Product - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.php">
+                <i class="fas fa-seedling me-2"></i>Admin Panel
+            </a>
+            
+            <div class="navbar-nav ms-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user me-2"></i><?php echo htmlspecialchars($_SESSION['admin_name']); ?>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.php">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="products.php">
+                                <i class="fas fa-box me-2"></i>Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="orders.php">
+                                <i class="fas fa-shopping-cart me-2"></i>Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customers.php">
+                                <i class="fas fa-users me-2"></i>Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reports.php">
+                                <i class="fas fa-chart-bar me-2"></i>Reports
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
+                            <a class="nav-link text-success" href="../index.php" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>Back to Website
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">View Product</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="products.php" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Products
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="card shadow">
+                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">Product Information</h6>
+                        <div>
+                            <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn btn-sm btn-primary me-2">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </a>
+                            <a href="products.php?delete=<?php echo $product['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
+                                <i class="fas fa-trash me-1"></i>Delete
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <?php if ($product['image']): ?>
+                                    <img src="../assets/images/products/<?php echo htmlspecialchars($product['image']); ?>" 
+                                         alt="<?php echo htmlspecialchars($product['name']); ?>" 
+                                         class="img-fluid rounded mb-3" style="max-height: 300px;">
+                                <?php else: ?>
+                                    <div class="bg-light rounded d-flex align-items-center justify-content-center mb-3" style="height: 300px;">
+                                        <i class="fas fa-image fa-5x text-muted"></i>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-8">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td width="30%"><strong>Product ID:</strong></td>
+                                        <td>#<?php echo $product['id']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Name:</strong></td>
+                                        <td><?php echo htmlspecialchars($product['name']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Category:</strong></td>
+                                        <td><?php echo htmlspecialchars($product['category']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Price:</strong></td>
+                                        <td class="text-success fw-bold">₹<?php echo number_format($product['price'], 2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Stock Quantity:</strong></td>
+                                        <td>
+                                            <?php if ($product['stock_quantity'] > 10): ?>
+                                                <span class="text-success"><?php echo $product['stock_quantity']; ?> (In Stock)</span>
+                                            <?php elseif ($product['stock_quantity'] > 0): ?>
+                                                <span class="text-warning"><?php echo $product['stock_quantity']; ?> (Low Stock)</span>
+                                            <?php else: ?>
+                                                <span class="text-danger"><?php echo $product['stock_quantity']; ?> (Out of Stock)</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Status:</strong></td>
+                                        <td>
+                                            <span class="badge bg-<?php echo $product['status'] === 'active' ? 'success' : 'danger'; ?>">
+                                                <?php echo ucfirst($product['status']); ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Created:</strong></td>
+                                        <td><?php echo date('d M Y H:i', strtotime($product['created_at'])); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Updated:</strong></td>
+                                        <td><?php echo date('d M Y H:i', strtotime($product['updated_at'])); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Description:</strong></td>
+                                        <td><?php echo nl2br(htmlspecialchars($product['description'])); ?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
