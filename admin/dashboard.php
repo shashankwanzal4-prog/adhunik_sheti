@@ -5,7 +5,7 @@
  */
 
 // Include database configuration
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
 
 // Start session
 session_start();
@@ -58,6 +58,10 @@ if ($result && $result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Adhunik Krushi Bhandar</title>
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
@@ -67,7 +71,7 @@ if ($result && $result->num_rows > 0) {
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
             <a class="navbar-brand" href="dashboard.php">
-                <i class="fas fa-seedling me-2"></i>Admin Panel
+                <img src="../assets/images/logo.png" alt="Admin Panel" height="50">
             </a>
             
             <div class="navbar-nav ms-auto">

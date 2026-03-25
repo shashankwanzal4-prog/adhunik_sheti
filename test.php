@@ -121,8 +121,8 @@ echo "</ol>";
 
 echo "<h2>📱 Access Your Website:</h2>";
 echo "<div style='background: #d4edda; padding: 15px; border-radius: 5px; margin: 10px 0;'>";
-echo "<strong>Main Website:</strong> <a href='http://localhost/Katkar_New/' target='_blank'>http://localhost/Katkar_New/</a><br>";
-echo "<strong>Admin Panel:</strong> <a href='http://localhost/Katkar_New/admin/' target='_blank'>http://localhost/Katkar_New/admin/</a><br>";
+echo "<strong>Main Website:</strong> <a href='http://localhost/Adhunik_Sheti/' target='_blank'>http://localhost/Adhunik_Sheti/</a><br>";
+echo "<strong>Admin Panel:</strong> <a href='http://localhost/Adhunik_Sheti/admin/' target='_blank'>http://localhost/Adhunik_Sheti/admin/</a><br>";
 echo "<strong>Admin Login:</strong> admin / admin123";
 echo "</div>";
 

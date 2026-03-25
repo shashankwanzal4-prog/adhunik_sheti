@@ -5,7 +5,7 @@
  */
 
 // Include database configuration
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
 
 // Start session
 session_start();
@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Adhunik Krushi Bhandar</title>
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -104,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-card">
         <div class="login-header">
             <div class="brand-logo">
-                <i class="fas fa-seedling"></i>
+                <img src="../assets/images/logo.png" alt="Adhunik Krushi Bhandar" height="60">
             </div>
             <h4 class="mb-0">Admin Panel</h4>
             <p class="mb-0">Adhunik Krushi Bhandar</p>

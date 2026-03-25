@@ -110,7 +110,7 @@ function sendEmailNotification($name, $phone, $email, $subject, $message, $submi
     $email_body .= "Subject: " . ($subject ?: 'Not specified') . "\n";
     $email_body .= "Message:\n{$message}\n\n";
     $email_body .= "Submitted at: " . date('Y-m-d H:i:s') . "\n";
-    $email_body .= "View in admin panel: http://localhost/Katkar_New/admin/contacts.php\n";
+    $email_body .= "View in admin panel: http://localhost/Adhunik_Sheti/admin/contacts.php\n";
     
     // Send email (may not work on local XAMPP without SMTP configuration)
     @mail($to, $email_subject, $email_body, $headers);

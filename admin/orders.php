@@ -5,7 +5,7 @@
  */
 
 // Include database configuration
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
 
 // Start session
 session_start();

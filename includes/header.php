@@ -20,16 +20,16 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Include database configuration
 try {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
 } catch (Exception $e) {
     die("Database connection failed: " . $e->getMessage());
 }
 
 // Include language configuration
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/language.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/language.php';
 
 // Define base path for navigation links
-$base_path = '/Katkar_New/';
+$base_path = '/Adhunik_Sheti/';
 
 // Get current language for display
 $current_lang = $lang->getCurrentLanguage();
@@ -56,6 +56,11 @@ if (isset($_SESSION['cart'])) {
     <title>Adhunik Krushi Bhandar - Empowering Farmers with Quality Agro Products</title>
     <meta name="description" content="Adhunik Krushi Bhandar - Your trusted partner for quality agricultural products, insecticides, fungicides, and farming solutions.">
     <meta name="keywords" content="agriculture, farming, insecticide, fungicide, PGR, organic farming, krushi bhandar">
+    
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -94,12 +99,8 @@ if (isset($_SESSION['cart'])) {
     <!-- Main Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="<?php echo $base_path; ?>index.php">
-                <i class="fas fa-seedling text-success me-2 fs-3"></i>
-                <div>
-                    <div class="fw-bold text-success">Adhunik Krushi</div>
-                    <small class="text-muted">Bhandar</small>
-                </div>
+            <a class="navbar-brand" href="<?php echo $base_path; ?>index.php">
+                <img src="<?php echo $base_path; ?>assets/images/logo.png" alt="Adhunik Krushi Bhandar" height="70">
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

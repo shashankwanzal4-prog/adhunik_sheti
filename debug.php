@@ -18,7 +18,7 @@ echo "<p>Current File: " . __FILE__ . "</p>";
 
 echo "<h2>Step 3: Test Database Connection</h2>";
 try {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
     echo "<p>✅ Database configuration loaded</p>";
     
     if (isset($db) && $db->conn) {
@@ -56,7 +56,7 @@ if (isset($db)) {
 }
 
 echo "<h2>Step 5: Check Header File</h2>";
-$header_path = $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/includes/header.php';
+$header_path = $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/includes/header.php';
 if (file_exists($header_path)) {
     echo "<p>✅ Header file exists: $header_path</p>";
 } else {

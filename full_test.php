@@ -57,7 +57,7 @@ test("Project directory exists", file_exists($_SERVER['DOCUMENT_ROOT'] . '/Katka
 echo "<h2>🗄️ Database Tests</h2>";
 
 // Test 4: Database configuration file exists
-test("Database config file exists", file_exists($_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php'));
+test("Database config file exists", file_exists($_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php'));
 
 // Test 5: Database connection
 $db_connected = false;
@@ -65,7 +65,7 @@ $products_table_exists = false;
 $admin_users_table_exists = false;
 
 try {
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/config/db.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/config/db.php';
     if (isset($db) && $db->conn) {
         $db_connected = true;
         test("Database connection", true);
@@ -127,7 +127,7 @@ $required_files = [
     'assets/js/script.js' => 'JavaScript',
 ];
 
-$base_path = $_SERVER['DOCUMENT_ROOT'] . '/Katkar_New/';
+$base_path = $_SERVER['DOCUMENT_ROOT'] . '/Adhunik_Sheti/';
 
 foreach ($required_files as $file => $description) {
     test("$description ($file)", file_exists($base_path . $file));
